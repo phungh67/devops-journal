@@ -8,4 +8,4 @@
 - # Application expected behavior
 
 	- ![application-expected-behavior.png](../Figures/application-behavior.png)
-- ## Chapter 1: [[Construct a simple CRUD application from scratch]]
+- ## Chapter 1: [Construct a simple CRUD application](./Construct%20a%20simple%20CRUD%20application%20from%20scratch.md)
