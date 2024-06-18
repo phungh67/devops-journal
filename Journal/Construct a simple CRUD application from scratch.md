@@ -65,7 +65,7 @@
 		- **Jenkins**: CI/CD tool written by Java, strong support for **GIT**.
 		- **Ansible**: Configuration management, using for setup machine, deploy application (on limited scale).
 		- **Docker**: A runtime for containerization application, create a fully (or nearly full) isolate environment for application, sharing the same kennel with your OS but will encapsulate application to not make any changes on host machine.
-		- ![deployment-workflow.png](../../assets/deployment-workflow_1718735280760_0.png){:height 497, :width 948}
+		- ![deployment-workflow.png](../Figures/deployment-workflow.png){:height 497, :width 948}
 - # 5. Troubleshooting
 	- ## 5.1 Common case(s):
 		- **Library is not supported anymore**
@@ -84,7 +84,7 @@
 		- **Caching error**
 			- This error will not make the application inaccessible or throw an exception to the client but in the application's log instead.
 			- Caching in these scenario is often for storing result of some complex queries. When these queries are executed again, the application will retrieve for cache and not wait the database to return the result. Since this application is handler by Flask and MySQL Alchemy, a fully supported framework, some queries with inner join, left join, join... are impossible to cache (with my current knowledge about software development, that is).
-				- ![caching-workflow.png](../assets/caching-workflow_1718735370822_0.png)
+				- ![caching-workflow.png](../Figures/caching-workflow.png)
 	- ## 5.2. Other case(s)
 		- TBA
 - # 6. Containerization
