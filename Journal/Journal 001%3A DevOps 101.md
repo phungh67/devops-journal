@@ -3,5 +3,5 @@
 - # Table of contents
 - # Diagram of this project
   id:: 6671ad8a-38c0-4782-9fa6-fe77c4c58556
-	- [[draws/2024-06-18-22-54-11.excalidraw]]
+	- ![application-simplify-diagram.png](../../assets/application-simplify-diagram_1718734105775_0.png)
 - ## Chapter 1: [[Construct a simple CRUD application from scratch]]
