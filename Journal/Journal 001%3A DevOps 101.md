@@ -3,9 +3,9 @@
 - # Table of contents
 - # Diagram of this project
   
-	- ![application-simplify-diagram.png](..\Figures\application-simplify-diagram.png)
+	- ![application-simplify-diagram.png](../Figures/application-simplify-diagram.png)
 
 - # Application expected behavior
 
-	- ![application-expected-behavior.png](..\Figures\application-behavior.png)
+	- ![application-expected-behavior.png](../Figures/application-behavior.png)
 - ## Chapter 1: [[Construct a simple CRUD application from scratch]]
