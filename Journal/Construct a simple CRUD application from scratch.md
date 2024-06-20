@@ -12,7 +12,7 @@
 - # 2. Anatomy of a Flask application
   Like any other programming language, there is a "recommend" structure for Flask application. Follow this standard outline will help coding progress and debugging progress more easy and clearly.
   The only thing you must care is ensure libraries are all installed.
-  For directory tree, refer to this [Sample directory tree](Application/README.md)
+  For directory tree, refer to this [Sample directory tree](../Application/README.md)
   Spend a few minutes in directory, you will have some questions, so here is the explanation:
 	- ``app.py`` is the executable file of application, when application runs, python will find and run this file.
 	- ``__init__.py`` is the "setup" file of this application, all the methods, libraries, variables, objects will be called and declared in this file.
@@ -68,7 +68,7 @@
 			EXPORT FLASK_APP=run.py
 			flask run
 			```
-			
+
 - # 4. Shipping the application to machine(s)
 	- Normally, using a single command ``flask run`` is enough to bring our application into work, but what will happen if we have to update it across multiple servers? It will be an impossible task due to its time consuming and easy to make mistakes.
 	- The easiest way to approach is: build a simple CI/CD workflow based on Git-Jenkins-Ansible-Docker.
