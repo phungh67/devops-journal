@@ -1,49 +1,27 @@
 #Application #Python #Flask
 
-# Back to navigator: [Index](./Journal%20001%253A%20DevOps%20101.md)
-
+- # Back to navigator: [Table of contents ](./Journal%20001%253A%20DevOps%20101.md)
 - # 1. Choosing a framework
   For convenient, a fast, easy-to-approach coding language should be chosen. There are several famous candidates: JAVA, Go lang and Python.
   Because job of a DevOps Engineer will involve in scripting, Python is the one to be picked.
   With Python, there are some framework with sizeable library for coding, programming a web application with a little effort. 
   Consider these two options:
-- Flask
-- FastAPI
+	- Flask
+	- FastAPI
   In this journey, application will be written with Python Flask framework because Flask has library for handling connection with MySQL cluster, Redis sentinel and some interesting stuffs that not required deep knowledge of web programming.
 - # 2. Anatomy of a Flask application
   Like any other programming language, there is a "recommend" structure for Flask application. Follow this standard outline will help coding progress and debugging progress more easy and clearly.
-  ```
-  ----app.py
-  ----__init__.py
-  ----templates
-  	\---- static.html
-  	\---- style.css
-  	\---- index.html
-  ----model
-  \----object1.py
-  \----object2.py
-  \----object3.py
-  ----views
-  \----page1
-  		\----views.py
-  		\----models.py
-  ----base.html
-  ----instance
-  	\----testing
-  	\----production
-  	\----staging
-  ----config
-  \----config.py
-  ```
-  The above figure describes a standard project tree of a Flask web application
-- ``app.py`` is the executable file of application, when application runs, python will find and run this file.
-- ``__init__.py`` is the "setup" file of this application, all the methods, libraries, variables, objects will be called and declared in this file.
-- ``model`` directory holds information about objects of this application. For example, a Human resource application will have some objects like "employees", "departments", "roles",... These are objects stored in that directory.
-- ``views`` directory holds the code of displayed pages (homepage, create department page, login page,...)
-- ``base.html`` is the common holder for every pages of this application.
-- ``templates`` holds static contents as well as ``.css`` file for styles.
-- ``instance`` holds the current environment variables or secrets of deployment (should not be included in version control).
-- ``config`` will instruct ``__init__.py`` where to get variables attributes or global properties (Behavior of the Redis cache, IP of MySQL cluster,...).
+  The only thing you must care is ensure libraries are all installed.
+  For directory tree, refer to this [Sample directory tree](Application/README.md)
+  Spend a few minutes in directory, you will have some questions, so here is the explanation:
+	- ``app.py`` is the executable file of application, when application runs, python will find and run this file.
+	- ``__init__.py`` is the "setup" file of this application, all the methods, libraries, variables, objects will be called and declared in this file.
+	- ``model`` directory holds information about objects of this application. For example, a Human resource application will have some objects like "employees", "departments", "roles",... These are objects stored in that directory.
+	- ``views`` directory holds the code of displayed pages (homepage, create department page, login page,...)
+	- ``base.html`` is the common holder for every pages of this application.
+	- ``templates`` holds static contents as well as ``.css`` file for styles.
+	- ``instance`` holds the current environment variables or secrets of deployment (should not be included in version control).
+	- ``config`` will instruct ``__init__.py`` where to get variables attributes or global properties (Behavior of the Redis cache, IP of MySQL cluster,...).
 - # 3. Begin the coding time
 	- Before we begin, there are several packages are needed to be installed on machine. Recommend OS is Linux. If these packages are not present, these commands can install them:
 		- ```sh
@@ -58,8 +36,39 @@
 		- The connection string from application to database should be like this:
 		- ```python
 		  MYSQL_CONNECTION_URL="pysql+mysql:<username>@<password>:<address_of_database>:<database_port>:<database_name>""
-		  ```
 		- Because the username application uses to connect to mySQL and the authentication string are stored in plain text, vault or any tool to encrypt and protect them are recommend.
+		- It is recommend to create the database begin the migration of application (that is, before you run application the first time).
+			```SQL
+			CREATE USER 'application_account'@'%' IDENTIFIED BY 'password';
+			CREATE DATABASE application_database;
+			GRANT ALL PRIVILEGES ON application_database . * TO 'application_account'@'%';
+			```
+		- Execute this command to begin the migration progress, Flask will create the database for you.
+			```bash
+			flask db init    # init the database object
+			flask db migrate # create migrate event
+			flask db upgrade # execute to database
+			```
+		- Show the database after these conmand.
+			```SQL
+			USE application_database;
+			SHOW TABLES;
+			+------------------------+
+			| Tables_in_dreamteam_db |
+			+------------------------+
+			| alembic_version        |
+			| departments            |
+			| employees              |
+			| roles                  |
+			+------------------------+
+			```
+		- To run the application, follow these steps:
+			```sh
+			EXPORT FLASK_CONFIG=development
+			EXPORT FLASK_APP=run.py
+			flask run
+			```
+			
 - # 4. Shipping the application to machine(s)
 	- Normally, using a single command ``flask run`` is enough to bring our application into work, but what will happen if we have to update it across multiple servers? It will be an impossible task due to its time consuming and easy to make mistakes.
 	- The easiest way to approach is: build a simple CI/CD workflow based on Git-Jenkins-Ansible-Docker.

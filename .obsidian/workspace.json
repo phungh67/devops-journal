@@ -1,0 +1,163 @@
+{
+  "main": {
+    "id": "dd20142d745898cf",
+    "type": "split",
+    "children": [
+      {
+        "id": "893b74ff77664e27",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b4f4f2aed6778a75",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Journal/Construct a simple CRUD application from scratch.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6b274fd1a4cb9c6c",
+    "type": "split",
+    "children": [
+      {
+        "id": "7814137c84abc12f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aca71adaf09919fb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d3ebb802dcb6b4f4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "0321424b6ae6c383",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "33e60e569f17c12a",
+    "type": "split",
+    "children": [
+      {
+        "id": "642b5d4b149aacf0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "38758b220a1c3ee6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Journal/Construct a simple CRUD application from scratch.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "09f23dc8aafd234e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Journal/Construct a simple CRUD application from scratch.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "252f0fe6043d4bdf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ffb9879cad911f91",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Journal/Construct a simple CRUD application from scratch.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "b4f4f2aed6778a75",
+  "lastOpenFiles": [
+    "Figures/software-stack-per-machine.png",
+    "Figures/software-stack-per-machine.png.crdownload",
+    "Figures/caching-cluster.png",
+    "Figures/caching-cluster.png.crdownload",
+    "Figures/database-structure.png.crdownload",
+    "Figures/database-structure.png",
+    "Application.md",
+    "Journal/Construct a simple CRUD application from scratch.md",
+    "Journal/Journal 001%3A DevOps 101.md",
+    "README.md",
+    "contents.md"
+  ]
+}
