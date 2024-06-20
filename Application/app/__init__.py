@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 from config import app_config
 
@@ -24,5 +25,11 @@ def create_app(config_name):
     login_manager.init_app(app)
     login_manager.login_message = "You must been logged in to view this content."
     login_manager.login_view = "auth.login"
+
+    # create the migration process 
+
+    migrate = Migrate(app, db)
+
+    from app import models
 
     return app
