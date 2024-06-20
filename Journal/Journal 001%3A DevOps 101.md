@@ -10,9 +10,9 @@ This is a journal about constructing a fully running application from scratch to
 	![[database-structure.png]](../Figures/database-structure.png)
 
 - # Caching cluster
-	! [[caching-cluster.png]](../Figures/caching-cluster.png)
+	![[caching-cluster.png]](../Figures/caching-cluster.png)
 
 - # Software stack
-	! [[software-stack-per-machine.png]](../Figures/software-stack-per-machine.png)
+	![[software-stack-per-machine.png]](../Figures/software-stack-per-machine.png)
 
 - ## Chapter 1: [Construct a simple CRUD application](./Construct%20a%20simple%20CRUD%20application%20from%20scratch.md)
