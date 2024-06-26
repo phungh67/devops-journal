@@ -243,3 +243,5 @@
   - *Complexity*: It is hard to setup and maintenance with a number of nodes to monitor which with different roles and hardware requirements.
   - *Resource consumption*: Require bandwidth to communicate with other nodes, with MySQL node and with management node. Require resources for in-memory storage, and disk space if data set becomes too large.
   - *Limited support*: It is not InnoDB or MyISAM enine.
+
+  # Back to [top](#back-to-navigator-table-of-contents)
