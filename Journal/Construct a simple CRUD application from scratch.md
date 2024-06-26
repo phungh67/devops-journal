@@ -99,5 +99,15 @@
 	- ## 5.2. Other case(s)
 		- TBA
 - # 6. Containerization
-	- ```Dockerfile
-	  ```
+	```Dockerfile
+		FROM python:3.8-slim-buster
+
+		COPY requirements.txt requirements.txt
+		RUN pip3 install -r requirements.txt
+
+		RUN echo "This is testing mark"
+
+		COPY . .
+		CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0" ]
+	```
+	This is a simple dockerfile for this containerization application with alpine image as base.
