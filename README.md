@@ -7,6 +7,8 @@ First of all, thank you for viewing my project. There are somethings about this 
 
 **For database** [Setup a MySQL cluster](./Journal/How%20to%20setup%20a%20HA%20database%20cluster.md)
 
+**Journey map** ![my-devops-journey](./Figures/devops-journey.png)
+
 
 1. This project is constructed when I am a Junior DevOps engineer (which is still correct at the moment), so some knowledge and some methods maybe not right, if you have any ideals or any contributes, feel free to clone this repository and edit it, after all, knowledge is for sharing.
 2. In this journal, "try and error" method was applied and I think this is the most appropriate for me to learn about new things.
