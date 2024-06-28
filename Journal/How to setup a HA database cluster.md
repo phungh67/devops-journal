@@ -244,4 +244,59 @@
   - *Resource consumption*: Require bandwidth to communicate with other nodes, with MySQL node and with management node. Require resources for in-memory storage, and disk space if data set becomes too large.
   - *Limited support*: It is not InnoDB or MyISAM enine.
 
+  # 4. How to setup a "real" database cluster
+  This section will guide you how to setup a simple database cluster to connect with our CURD application on [section 1](Construct%20a%20simple%20CRUD%20application%20from%20scratch.md). This database will act as a single source to store user data, application data, etc, ...
+  
+  To bring it as closer as production environment, HA proxy and keepalive are used too.
+
+  To read more about HA proxy (a brief, to know what is it, how's it working and how to config it in a simple way), please refer to this:
+
+  To read about keepalived, a software to help fail-over process and create a VIP (Virtual IP), please refer to this:
+
+  ## 4.1. Preparation
+  That's it, prepare your VMs for constructing a new database cluster on your own.
+
+  For best practice, you can create with EC2 (from AWS) or with Oracle VMs, or Vargant, depends on your choice.
+
+  Frist, install MySQL server.
+  ```bash
+  sudo apt update
+  sudo apt install mysql-server
+  sudo systemctl start mysql.server
+  ```
+
+  Second, configure for administrator user. This is mandatory if your want to perform the "best practice" method (which means, setup & config as you are working on a production environment with no expection, no stupid config).
+  ```bash
+  sudo mysql # this will log you in, with root privilege
+  ```
+
+  ```sql
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+  ```
+
+  Remember to use a strong password with at least 8 characters, upper case, lower case, number and special character.
+
+  After that, using command ``quit`` to return to terminal
+
+  Perform ``sudo mysql_secure_installation`` to complete MySQL installation. Remember to read carefully each line, each requirements and each instrucions given by MySQL shell.
+
+  ## 4.2. Customize your SQL
+  Because we're going to setup an HA cluster, which will come with a load balancer, a VIP (virtual IP) so that a problem comes: "Port conflict". The easiest way to solve this is: default port changing. To do so, modify configuration file of MySQL is enough.
+
+  ```bash
+  sudo vim /etc/mysq/my.cnf
+
+  [mysqld]
+
+  server-id               = 1                       # indentical for server ID
+  log-bin                 = "mysql-bin"             # bin log prefix
+  relay-log               = "mysql-relay-log"       # relay log for replication
+  bind-address            = 0.0.0.0                 # bin port, because MySQL bind to localhost by default
+  port                    = 13306                   # change listening port to 13306
+  ```
+
+  The below configuration is about to setup a master server with ``server-id=1``. The best way to illustrate is learn how to setup a simple cluster with 1 master and 1 replica and the above is how to setup a master.
+  
+
+
   # Back to [top](#back-to-navigator-table-of-contents)

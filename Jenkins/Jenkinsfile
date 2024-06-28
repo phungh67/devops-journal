@@ -1,0 +1,86 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_REGISTRY = "harbor.ghtk-lab.local"
+        IMAGE_NAME = 'ghtk-lab/flask-application'
+        DEFAULT_TAG = 'latest'
+    }
+
+    stages {
+        stage ('Checkout source code'){
+            steps{
+                cleanWs()
+                git credentialsId: 'huyhoang-gitlab', url: 'https://git.ghtk-lab.local/huyhoang.ph/flask-web-application.git', branch: 'main'
+                sh "ls -lart ./*"
+                echo "Getting the git tag of the current version"
+                script {
+                    withCredentials([gitUsernamePassword(credentialsId: 'huyhoang-gitlab', gitToolName: 'git-tool')]){
+                        sh "git fetch https://git.ghtk-lab.local/huyhoang.ph/flask-web-application.git --tags"
+                        def gitTag = sh(script: "git tag -l", returnStdout: true).trim()
+                        env.GIT_TAG = gitTag
+                        echo "Git tag is: ${env.GIT_TAG}"
+                }
+                }
+            }
+        }
+
+        stage('Build image'){
+            steps{
+                // List all files for easy debug
+                sh 'echo "Begining checking files"'
+                sh 'ls -lart'
+                sh "docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_TAG} ."
+            }
+        }
+        
+        stage('Push image'){
+            steps{
+                script {
+                    // docker.withRegistry("https://${DOCKER_REGISTRY}", "harbor-registry-credential")
+                    // docker.withDockerRegistry([credentialsID: 'harbor-registry-credential', url: 'https://harbor.ghtk-lab.local'])
+                    withCredentials([usernamePassword(credentialsId: 'harbor-registry-credential', passwordVariable: 'HARBOR_PASS', usernameVariable: 'HARBOR_USER')]){
+                        sh "docker login -u $HARBOR_USER https://harbor.ghtk-lab.local -p $HARBOR_PASS"
+                        sh "docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_TAG}"
+                    }
+                }
+            }
+        }
+        stage('Deploy to machine(s)'){
+             steps{
+                sshagent(credentials: ['ansible-ssh-key']){
+                    sh "echo pwd"
+                    sh 'ssh -t -t hoangph@172.16.98.105 -o StrictHostKeyChecking=no "sudo docker rm -f flask-application"'
+                }
+                ansiblePlaybook(installation: 'ansible',
+                                 credentialsId: 'ansible-ssh-key',
+                                 inventory: '/var/ansible/hosts',
+                                 playbook: '/var/ansible/ansible-docker.yml',
+                                 vaultCredentialsId: 'ansible-vault',
+                                 disableHostKeyChecking: true,
+                                 colorized: true,
+                                 extras: "-e GIT_TAG=${GIT_TAG} -e @/var/ansible/vars/variables.yml",
+                                 )
+                 sh 'echo "This is post push jobs"'
+                 sh 'echo "Delete local images to save space"'
+                 sh 'docker image rm ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_TAG}'
+            }
+        }
+        // stage('Deploy image to machine(s)') {
+        //    steps{
+        //        sshagent(credentials: 'ansible-ssh-key'){
+        //            sh "echo pwd"
+        //            sh 'ssh -t -t hoangph@172.16.98.105 -o StrictHostKeyChecking=no "docker run -d --name flask-application -p 5000:5000 -e FLASK_APP=run.py -e FLASK_CONFIG=development ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_TAG}"'
+        //        }
+        //        sh 'echo "Cleaning up the image ..."'
+        //        sh 'docker rmi ${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_TAG}'
+        //    }
+        // }
+    }
+
+    post{
+        always {
+            echo 'Cleaning up ...'
+            cleanWs()
+        }
+    }
+}
