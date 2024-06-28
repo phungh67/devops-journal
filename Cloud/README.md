@@ -10,3 +10,4 @@ Soon, this directory will be separate from repository. Keep an eye on this place
 
 This will be the directory structure:
 
+![terrafrom-project-structure](../Figures/terrafrom-project-structure.png)
