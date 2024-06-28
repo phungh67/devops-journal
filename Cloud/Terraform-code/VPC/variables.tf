@@ -1,1 +1,1 @@
-../variables.tf
+E:/Journal/pages/Cloud/Terraform-code/variables.tf
