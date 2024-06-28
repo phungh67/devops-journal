@@ -295,8 +295,43 @@
   port                    = 13306                   # change listening port to 13306
   ```
 
-  The below configuration is about to setup a master server with ``server-id=1``. The best way to illustrate is learn how to setup a simple cluster with 1 master and 1 replica and the above is how to setup a master.
+  The below configuration is about to setup a master server with ``server-id=1``. The best way to illustrate is learn how to setup a simple cluster with 1 master and 1 replica and the above is how to setup a master. If you want to get the configuration file, please refer to [this file](../MySQL/my.cnf), you will find that ``my.cnf`` is also a blank file in ``/etc/mysql`` and yes, that is the file to hold your personal configuration without making any "wrong" changes to original configuration file.
+
+  Assume that you have completed setup and restart successfully database with new configuration, if not, please ensure that you have ``[mysqld]`` at the top line, MySQL will not run if the configuration file does not begin with that clause.
+
+  Next, make sure port ``13306`` is open and reachable.
   
+  From replica machine, try this command
+  ```bash
+  telnet ip_address_of_master 13306
+  ```
+  If the command return successful code like ``press ^] to exit``, wola, you are good to go, if not, debug it.
+
+  When the master is done, begin with replica. Becasue we have only 1 replica, this is quite simple. Repeat the process above to install MySQL, change root password and config, but this with different ``server-id``, you can assign 2 or 3, no matter with the number since we have only two servers.
+
+  Now, this is the moment of truth, from the master, execute these commands:
+
+  ```sql
+  mysql> FLUSH TABLES WITH READ LOCK;
+  ```
+
+  This command ensure that all transactions after this command will not be permitted, because if transactions are still be made during replication setup, error will occur.
+
+  **This guide is using binlog position as replica method, about GTID, check below section**
+
+  After lock all tables, execute this command to know the current status of bin log (which file is currently processed and which position)
+
+  ```sql
+  mysql> SHOW BINARY LOG STATUS\G
+  *************************** 1. row ***************************
+             File: mysql-bin.000003
+          Position: 73
+          Binlog_Do_DB: test
+          Binlog_Ignore_DB: manual, mysql
+          Executed_Gtid_Set: 3E11FA47-71CA-11E1-9E33-C80AA9429562:1-5
+  1 row in set (0.00 sec)
+  ```
+
 
 
   # Back to [top](#back-to-navigator-table-of-contents)
