@@ -332,6 +332,19 @@
   1 row in set (0.00 sec)
   ```
 
+  For example, above command shows that binlog is currently at number 3 file with the position 73. The replica needs to know these information to estanblish replication process correctly. Remember to note down filename and position.
+
+  A very **IMPORTANT** thing to know that, in replica process, username and password of replica use will be store as plain text, which means every one access to database can read and take over the control of that account. Minumum privilege is recommend.
+
+  Using these commands to create a new user for replication purpose only with minimum privileges:
+  ```sql
+  mysql> CREATE USER 'repl'@'%.example.com' IDENTIFIED BY 'password';
+  mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.example.com';
+  ```
+  The `%` indicates that the account `repl` can access the database from anywhere, you can specify subnet, or a specific IP at will, using `%` for the wildcard character.
+
+  
+
 
 
   # Back to [top](#back-to-navigator-table-of-contents)
