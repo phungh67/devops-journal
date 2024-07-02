@@ -76,4 +76,12 @@
 
     This model is the simplest to achieve and the most basic one to begin with when you start to learn about database replication. In this model, just one server has the right to write data and execute data manipulation commands, the rest servers are read only, cannot make any change to the dataset as well as used for only "SELECT" command.
 
+    ![Master slave model](../Figures/database-master-slave.jpg)
+
+    As you see, through network connection, slave or replica will somehow pull (or percisely, the bin log of master) bin log from master to its local storage. If this step is completed, a thread called MySQL thread will read that log and write transactions it read into relay log (sounds like replay somehow). With these information, SQL thread will apply all the transactions to slave's dataset. When all changes have been applied, it will send back an ack (acknowledge) for master to notify that replication process has been done.
+
+    This is a high level view, I have to admit that some knowledge I know maybe wrong or not 100% correct, so if you have any opinions or any advises, please pull this repository and help me complete it.
+
+    Back to the main topic, this model is suitable for content management system or a system that requires read more that write. But in the real world, as I see and as my mentors indicate that, except some situation that need specific database architecture, 80% service will use this architecture for database.
+
   # Back to [top](#back-to-navigator-table-of-contents)
