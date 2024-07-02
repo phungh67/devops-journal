@@ -15,7 +15,7 @@
   - Bin log replication.
   - Global transaction ID replication (GTID).
   
-  # 2.1 Bin log way
+  ## 2.1 Bin log position way
   - **What is the bin log?**
   Bin log is short called of binary log, a file (in text form, encoded) that contains all recored of activity of a database. These activity includes: ``DELETE``, ``UPDATE``, ``CREATE``, ``ALTER`` and ``INSERT`` or even ``DROP``.
   The bin log acts as a source for recovering, replicating and even auditing.
@@ -25,7 +25,7 @@
     - Row-based logging: Logged actual data changes (the affected rows). Will product a large data for bin log.
     - Mixed: contain statement-based and row-based. Server will decide when to use row or statement.
   - **Must set rule to rotate, remove or archive binlog for storage space**
-  # 2.2 Global transaction ID
+  ## 2.2 Global transaction ID
   - **Definition**
   It is a unique identifier assigned to each transaction that is commited in a MySQL database. This is globally, so it is very easy to tracked across all nodes. Format of this ID: ``UID_of_machine:ID_of_transaction``. When an ID is assined to a transaction, it can not be changed, with this, consistency is ensure.
   - **Life cycle**
@@ -61,4 +61,19 @@
     +----------------------------------+-------------------------------------------+
     9 rows in set (0.29 sec)
     ```
+
+    ## 2.3 Notes (very important to read)
+
+    According to my mentors, both ways are using bin log, one way uses position and on way uses GTID. It is not about using the bin log or not. Please remember that.
+
+    # 3. Replication type of a MySQL database
+
+    As a very popular database software, MySQL has been developed well and comes with many type of replication setup which will be fit into many different scenarios.
+
+    ## 3.1. Traditional model: an old fashion yet dominant way
+
+    It is formely called master slave, but with some "racist" problems, now we call it "controller - replica" model.
+
+    This model is the simplest to achieve and the most basic one to begin with when you start to learn about database replication. In this model, just one server has the right to write data and execute data manipulation commands, the rest servers are read only, cannot make any change to the dataset as well as used for only "SELECT" command.
+
   # Back to [top](#back-to-navigator-table-of-contents)

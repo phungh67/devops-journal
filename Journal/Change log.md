@@ -1,0 +1,2 @@
+**29/06/2024**: Adding Cloud section with Terraform code to build AWS infrastructure, will be added more.
+**03/07/2024**: Add database replication knowledge. Add GTID/Bin log pos replication explanation
