@@ -343,6 +343,23 @@
   ```
   The `%` indicates that the account `repl` can access the database from anywhere, you can specify subnet, or a specific IP at will, using `%` for the wildcard character.
 
+  After the replication user is created, on slaves, execute these command:
+  ```sql
+  change master to 
+  master_host='host_ip',
+  master_user='replica_username',
+  master_password='replica_user_password',
+  master_port='host_mysqL_port',
+  master_log_file='name_of_current_bin_log_file',
+  master_log_pos='position_of_current_bin_log',
+  get_master_public_key=1;
+  ```
+
+  If executed successfully, you can invoke the replication process by ``start slave``. Using command ``show slave status`` to monitor the process. If ``second_behind_master`` is zero, it can be considered as replication process are setup completed.
+
+  But one important thing to know that: even ``second_behind_master`` drop to zero, it does not mean that every transactions executed on master are deliveried and applied to slaves. Many reasons to explain, network delay, disk high I/O, resources consumption,... ``second_behind_master`` just indicated that, every transactions that I/O thread in slaves have pulled to rely logs have been applied successfully. In order to ensure the replication on a 'production' environment, you should query some variables like `gtid-execution-set` on both master and slaves to ensure they are up-to-date.
+
+
   
 
 
