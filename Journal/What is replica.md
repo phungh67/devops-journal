@@ -84,4 +84,33 @@
 
     Back to the main topic, this model is suitable for content management system or a system that requires read more that write. But in the real world, as I see and as my mentors indicate that, except some situation that need specific database architecture, 80% service will use this architecture for database.
 
+    **Pros**:
+    - Easy to update, straight forward, can use biglog position of GTID for repication.
+    - Ensure data consistency, all data on the source will be available on replicas.
+    - Don't have to handle data conflict when joining nodes.
+    **Cons**:
+    - Limited write capacitiy since only one node is allowed to execute write commands.
+    - Single point of failure, when master node is down, all transaction will be refused.
+    - High workload of replicas can cause high lag (second behind master) which will cause data inconsistency.
+
+  ## 3.2. Semi-synchronous model: A model that fits will high consistency service.
+
+  This model is pretty similar to master-slave mode, except, it always have at least (or more, if operators and developers need) 1 replica syncs with master. Which means, with every transactions happened, it must be acknowledged with that replica before applying into data set.
+
+  In this case, it is ensured that every transaction has been applied into dataset. Imagine that you have a finance application, to ensure HA, you are setting up multi master, that allow multi write, but it has many disadvantages like "split brain", "data conflict",... so you came up with semi synchronous. Every time user calls a transaction, the master will accept it and write its dataset, normally, its binlog will be transported to replicas after a short delay (or long, depends network's conditions, depends on the size of dataset,...) But what if you want to ensure your data is available in read replicas.
+
+  In normal master salve, the most transaction maybe unavailable on read replicas right after commit, but in this model it will be available.
+
+  ![Semi synchronous mode](../Figures/semi-synchronous.png)
+
+  ## 3.3. Delayed model: A model help you rollback if any errors occur
+
+  Before beginning, we must know that, in master slave model, the delayed time between binlog writing in master and binlog delivery on replicas is not controlled by operator, it depends on network, size, ...
+
+  So, this is the case, what will happen if an junior or a new commer operator accidentally ``DROP`` a whole table? I's sure that would be "disaster" in term of DevOps. Of course we will need recover (yes, DevOps's mission is ensure we always have backup) but it will take time.
+
+  So this "delayed" replication will ensure that, after a certain number of time (minutes, hours, days), the binlog will be delivered to replicas and applied. With this approach, we will have a "cold" source of data. In this case, we just need to switch traffic to replica, accept data loss instead of stopping service to wait for recovery.
+
+  ![Delay sync](../Figures/delayed-sync.png)
+  
   # Back to [top](#back-to-navigator-table-of-contents)

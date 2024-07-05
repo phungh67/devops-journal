@@ -50,11 +50,40 @@ export FLASK_APP=run.py
 flask run
 ```
 
+![Application port map](./Figures/running-application.png)
+
 Naviage to your http://localhost:5000 and you will see your application is running. Maybe in newer version of Ubuntu and Python, it will force you to create a virtual environment to run this application. Because my application is containerization, so, it is better to do this:
 ```sh
 docker build -t devops-journal/flask-application .
 docker run -d --name flask-application -e "FLASK_CONFIG=development" -e "FLASK_APP=run.py" -p 5000:5000
 ```
 
+# 2. Setup the database
+If you have setup the database before of reading anyone of these pages [CRUD application](../pages/Journal/Construct%20a%20simple%20CRUD%20application%20from%20scratch.md) or [HA for database](../pages/Journal/How%20to%20setup%20a%20HA%20database%20cluster.md), you can skip this step, if not, you can setup a simple database with these command (I will give you the sample ``.sql`` backup file for quick setup)
+
+```sh
+mysql -u root -P 13306 -p
+```
+```sql
+create flask_application;
+create user 'flask'@'%' identified by 'Application@2024`;
+grant all privileges on flask_application.* for 'flask'@'%';
+```
+
+```sh
+mysql -u root -P 13306 -p flask_application < flask_application.sql
+```
+
+After restore successfully, your application can run normally, if not, it will display ``500: Internal server error``.
+
+If you want to use Ansible, I will add the playbook later, but now, since it is simple, you can set up it normally
+
+# 3. Setup the CI-CD workflow with GitLab, Jenkins and Ansible
+
+GitLab and Jenkins should be run in containerization form for easy managing. I will update GitLab configuration as well as Jenkins custom Dockerfile.
+
+To re-create the environment as close as production, I will create self signed certificate with local DNS. If you have advanced knowledge, create and host your own DNS server as well.
+
+![CI-CD](./Figures/deployment-workflow.png)
 
 Contact: phungh67@gmail.com
