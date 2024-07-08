@@ -1,6 +1,6 @@
 #Application #Python #Flask
 
-- # Back to navigator: [Table of contents ](./Journal%20001%253A%20DevOps%20101.md)
+- # Back to navigator: [Table of contents ](Summary.md)
 - # 1. Choosing a framework
   For convenient, a fast, easy-to-approach coding language should be chosen. There are several famous candidates: JAVA, Go lang and Python.
   Because job of a DevOps Engineer will involve in scripting, Python is the one to be picked.
