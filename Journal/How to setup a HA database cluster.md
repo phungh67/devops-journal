@@ -1,5 +1,5 @@
 #Database
-  # Back to navigator: [Table of contents ](Journal%20001%253A%20DevOps%20101.md)
+  # Back to navigator: [Table of contents ](https://github.com/phungh67/devops-database)
   # Pre-requisiste: [Replication method](What%20is%20replica.md)
   # 1. Database problem
   As usual, database is used to store a large amount of data. In general programming, or "playground" coding, we are care little about database, because that only needs some variables, arrays or something. But in the production environment, data is stored to a database.

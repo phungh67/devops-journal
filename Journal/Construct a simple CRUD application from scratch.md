@@ -1,6 +1,6 @@
 #Application #Python #Flask
 
-- # Back to navigator: [Table of contents ](Summary.md)
+- # Back to navigator: [Table of contents ](https://github.com/phungh67/devops-sample-application)
 - # 1. Choosing a framework
   For convenient, a fast, easy-to-approach coding language should be chosen. There are several famous candidates: JAVA, Go lang and Python.
   Because job of a DevOps Engineer will involve in scripting, Python is the one to be picked.
@@ -12,7 +12,6 @@
 - # 2. Anatomy of a Flask application
   Like any other programming language, there is a "recommend" structure for Flask application. Follow this standard outline will help coding progress and debugging progress more easy and clearly.
   The only thing you must care is ensure libraries are all installed.
-  For directory tree, refer to this [Sample directory tree](../Application/README.md)
   Spend a few minutes in directory, you will have some questions, so here is the explanation:
 	- ``app.py`` is the executable file of application, when application runs, python will find and run this file.
 	- ``__init__.py`` is the "setup" file of this application, all the methods, libraries, variables, objects will be called and declared in this file.
