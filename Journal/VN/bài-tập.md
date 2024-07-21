@@ -1,45 +1,38 @@
+[Quay về phần dẫn](./đề-mục.md)
+
+---
 # Mục lục
-
-1. [Lời nói đầu](#lời-nói-đầu)
-2. [Phân tích đề tài](#phân-tích-đề-bài)
-3. [Mô hình đề tài](#mô-hình-của-đề-tài)
-4. [Tham khảo](#tham-khảo)
-
-# 1. Lời nói đầu
-  Đây là một bài tập có thể gọi là nhập môn của DevOps, bài này sẽ bao gồm nhiều phần, những phần đó sẽ cấu tạo nên một dự án hoàn chỉnh mà các bạn có thể gặp trong môi trường làm việc thực tế.
-
-  Đây là đầu bài đầy đủ:
-  
-  ***Thực hiện triển khai một web application đơn giản lên môi trường container hoặc VMs với luồng CI-CD đầy đủ. Trong đó, ứng dụng có đảm bảo việc sử dụng database và dùng cache. Có thiết lập build ứng dụng tách biệt môi trường testing và production (đánh tag hoặc đánh version theo định nghĩa đầy đủ). Có triển khai tầng monitoring và alerting.***
-
-# 2. Phân tích đề bài
-  Như các bạn thấy, đề bài có những yêu cầu cơ bản và có thể tách thành các khối (block) sau đây:
-  - Application block: Ứng dụng là dạng web application, khuyến khích mọi người dùng Python Flask hoặc FastAPI cho nhanh, ứng dụng chỉ là dạng CRUD đơn giản là được. Yêu cầu với block này:
-    - Có API để ghi, lấy dữ liệu từ database.
-    - Có API đọc ghi vào cache.
-    - Có API healthcheck đơn giản.
-  - Database block: Khối CSDL, khối này bao gồm cả CSDL chính của ứng dụng, dùng để lưu trữ thông tin người dùng cũng như các dữ liệu khác và cache. Yêu cầu thiết kế của khối là đảm bảo tính HA. Để biết tính HA là gì, tham khảo [HA](../Eng/How%20to%20setup%20a%20HA%20database%20cluster.md) (cho bản tiếng Anh). Yêu cầu
-    - Có tính HA.
-    - Auto failover.
-    - Hiểu được các mô hình replica phổ biến cho CSDL
-  - CI-CD block: Khối tích hợp và triển khai. Đây là khối đảm bảo tính tự động hoá cho ứng dụng. Với mô hình ứng dụng truyền thống, mỗi khi cần triển khai phiên bản mới, system admin có thể phải tự làm các công việd (hoặc SRE - Software Release Engineer) từ chạy lệnh build cho đến start stop application thủ công, cập nhập phiên bản rồi restart lại servers chẳng hạn. CI/CD giúp giảm thời gian cho quá trình này và làm nó đơn giản hơn. Yêu cầu
-    - Có build Images và tag tuỳ theo môi trường (PRD hoặc Testing).
-    - Triển khai dạng kubernetes (container).
-  - Logging: Đây là khối tập trung tất cả các logs của service (application) hoặc là hệ thống servers. Thường thì khi chưa dùng hệ thống quản lý Logs tập trung, chúng ta cần thiết phải vào từng server và đọc từng file logs, có hệ thống này thì việc trace logs sẽ đơn giản hơn.
-    - Đầy đủ luồng: collector -> aggregation -> log storage -> visualizer
-  - Monitoring: Khối này thì đơn giản hơn, yêu cầu cũng nhẹ nhàng hơn nhiều
-    - Sử dụng Prometheus và Grafana
-    - Sử dụng Alert manager để alerting
-
-# 3. Mô hình của đề tài
-  Đề tài có mô hình như sau:
+---
 
 
-  ![appication-diagram](../../Figures/tech-stack.jpg)
 
-# 4. Tham khảo
-  - [Xây dựng một ứng dụng CRUD đơn giản dùng Python và Flask](https://github.com/phungh67/devops-sample-application)
-  
-  - [Lý thuyết về HA cho database](../../Journal/Eng/How%20to%20setup%20a%20HA%20database%20cluster.md) và [Configuration cho database](https://github.com/phungh67/devops-database)
 
-  - Còn tiếp ...
+---
+# 1. Phân tích đề tài
+  Về đề tài, các bạn đã nắm được đề bài rồi, vậy để đơn giản và đỡ dài dòng, mình xin được tóm tắt những điểm cần cần phân tích của từng block như sau (mình chia thành các block - task) cho đơn giản ha:
+  - CRUD application: Cái này thì về source code có rất nhiều trên các trang mạng của cả viblo hoặc các page khác như medium, digitalocean,... điều mình cần thêm vào là ``caching`` và ``healthcheck``. Vì đây là một ứng dụng đơn giản, chúng ta sẽ bỏ qua (tạm) các khái niệm kiểu ``session caching`` cho đỡ phức tạp, thì vai trò của ``cache`` ở đây chỉ đơn giản là lưu kết quả của các câu query từ database thôi, như thế này này:
+  ![caching-mechanism](../../Figures/caching-workflow.png)
+  Còn healthcheck thì tùy mọi người triển khai, có thể từ những healthcheck đơn giản xem service sống hay chết cho đến các case phức tạp như monitor từng sites của application.
+
+  - Về database, để đảm bảo yêu cầu HA, chúng ta cần một số khái niệm cũng như hiểu biết trước, cái này mình sẽ có bài viết dẫn link chi tiết nhé. Còn hiện giờ, các bạn sẽ chỉ cần hiểu yêu cầu đại ý là: một cụm database để làm sao khi nhỡ ra có sự cố thì app của chúng ta không chết, tiếp tục hoạt động  và vẫn đáp ứng nhu cầu truy cập dữ liệu. Tương tự như thế với cụm cache.
+
+  - Về phần CI/CD, để thỏa mãn yêu cầu của phần này, chúng ta cần những stack đơn giản, nhưng phổ biến trong DevOps, như mình sẽ dùng Jenkins + Ansible và ArgoCD. ``Ansible`` sẽ giúp mình deploy lên môi trường test đơn giản, còn ``ArgoCD`` giúp mình deploy ứng dụng lên môi trường "production" với các deployment, các daemonset,...
+
+  - Phần monitoring và logging thì đơn giản hơn, chúng ta dùng stack ELK và Prometheus + Grafana là xong thôi.
+
+# 2. Lựa chọn các toolchain cho đề tài
+  Sau khi phân tích xong, mình sẽ đi đến chốt các tool chain, sắp xếp các luồng để chúng ta tạo nên ứng dụng. Các bạn có thể sử dụng như 1 bộ khung nếu muốn customized hoặc là follow theo để hiểu trước cũng được á.
+
+  - Application: mình chọn Python và Flask cho đơn giản, và mình dự sẽ dùng container để triển khai lên môi trường test, production thì mình sẽ xây cụm kubernetes bằng ``kubeadm``. 
+  - Database mình sẽ chọn ``MySQL`` với ``Galera`` để config cluster, mình cũng sẽ hướng dẫn qua cách config bằng tay nữa, tuy nhiên production thì không khuyến khích lắm nha. Cache thì mình chọn ``Redis``.
+  - Luồng CI/CD như đã nói ở trên, ``Jenkins`` sẽ là ngôi sao chính của mình, bên cạnh đó còn ``Ansible`` và ``ArgoCD`` nữa.
+  - Stack logging thì mình chọn agent là ``filebeat`` còn bộ xử lý - lưu trữ - thể hiện thì là ``ELK``.
+  - Monitoring dùng ``Prometheus`` và ``Grafana`` kết hợp với ``AlertManager`` và ``Telegram`` để tạo 1 con bot chuyên cảnh báo. Đúng vậy, chúng ta sẽ tạo 1 con bot đơn giản cho việc này.
+
+# 3. Bắt tay vào làm thôi
+  ## 3.1. Tạo ứng dụng CRUD của riêng chúng ta
+
+  Phần này thì do mình clone từ source bên ngoài về nên mình sẽ trích nguyên văn phần hướng dẫn và source code từ nguồn nha:
+  - Nguồn ở page này: [Viblo-Tiếng-Việt](https://viblo.asia/p/xay-dung-ung-dung-web-crud-voi-python-va-flask-phan-mot-naQZRyydKvx)
+  - Souce code của mình đây (hiện chưa thêm cache và healthcheck): [Source Code](https://github.com/phungh67/devops-sample-application)
+  - Các bạn có thể đọc thêm các ghi chép của mình về cách cài đặt, container hóa,... về application ở file này (tiếng anh) [English](../../Journal/Eng/Construct%20a%20simple%20CRUD%20application%20from%20scratch.md) hoặc tiếng Việt ở đây
