@@ -1,12 +1,18 @@
 [Về đầu trang](../../README.md)
+
 [Về đề mục](./đề-mục.md)
+
 [Về phần bài tập](./bài-tập.md)
 
 # Mục lục
+
 [Mở đầu](#mở-đầu)
+
 [1. Chuẩn bị](#phần-1-chuẩn-bị)
-[2. Setup và Config](#phần-2-cài-đặt-và-setup-mysql-server-trên-linux)
-[3. Phân quyền user](#3-user-cho-việc-tạo-replica)
+
+[2. Setup môi trường](#phần-2-cài-đặt-môi-trường-chạy-application)
+
+[3. Lưu ý](#phần-3-một-số-lưu-ý)
 
 
 
@@ -105,5 +111,7 @@
   ---
 
   [Back to top](#mở-đầu)
+
   Phấn trước: [Database](./phần-1-database.md)
+
   Phần tiếp theo: 
