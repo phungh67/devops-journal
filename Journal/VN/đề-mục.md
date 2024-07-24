@@ -62,4 +62,6 @@ Oke, sau đây mình sẽ đi vào dựng từng thành phần của bài tập,
 
 **Phần 1:** Tạo và setup database phục vụ cho ứng dụng [Link](./phần-1-database.md)
 
+**Phần 2:** Chạy ứng dụng CRUD với database mới setup [Link](./phần-2-application.md)
+
 

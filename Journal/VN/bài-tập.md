@@ -30,9 +30,5 @@
   - Monitoring dùng ``Prometheus`` và ``Grafana`` kết hợp với ``AlertManager`` và ``Telegram`` để tạo 1 con bot chuyên cảnh báo. Đúng vậy, chúng ta sẽ tạo 1 con bot đơn giản cho việc này.
 
 # 3. Bắt tay vào làm thôi
-  ## 3.1. Tạo ứng dụng CRUD của riêng chúng ta
 
-  Phần này thì do mình clone từ source bên ngoài về nên mình sẽ trích nguyên văn phần hướng dẫn và source code từ nguồn nha:
-  - Nguồn ở page này: [Viblo-Tiếng-Việt](https://viblo.asia/p/xay-dung-ung-dung-web-crud-voi-python-va-flask-phan-mot-naQZRyydKvx)
-  - Souce code của mình đây (hiện chưa thêm cache và healthcheck): [Source Code](https://github.com/phungh67/devops-sample-application)
-  - Các bạn có thể đọc thêm các ghi chép của mình về cách cài đặt, container hóa,... về application ở file này (tiếng anh) [English](../../Journal/Eng/Construct%20a%20simple%20CRUD%20application%20from%20scratch.md) hoặc tiếng Việt ở đây
+  Hướng dẫn chi tiết của từng phần được cập nhập ở [đây](./đề-mục.md)
