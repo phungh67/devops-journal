@@ -134,4 +134,4 @@
   ---
 
   [Back to top](#mở-đầu)
-  Phần tiếp theo: 
+  Phần tiếp theo: [Application](./phần-2-application.md)
