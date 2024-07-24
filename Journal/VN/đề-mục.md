@@ -60,3 +60,6 @@ Trên đây là đề bài đơn giản của mình, đó là một phần đề
 
 Oke, sau đây mình sẽ đi vào dựng từng thành phần của bài tập, các bạn có thể check qua phần phân tích đề bài và chọn giải pháp ở [đây](./bài-tập.md) hoặc có thể đi sâu vào từng phần cụ thể (code, database, ...) tùy theo nhu cầu, link mình sẽ tạo sau nha:
 
+**Phần 1:** Tạo và setup database phục vụ cho ứng dụng [Link](./phần-1-database.md)
+
+
