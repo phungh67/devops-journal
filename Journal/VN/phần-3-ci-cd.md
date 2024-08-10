@@ -10,49 +10,24 @@
 
 [1. Chuẩn bị](#phần-1-chuẩn-bị)
 
-[2. Setup môi trường](#phần-2-cài-đặt-môi-trường-chạy-application)
+[2. Setup môi trường]()
 
-[3. Lưu ý](#phần-3-một-số-lưu-ý)
+[3. Lưu ý]()
 
 
 
 
 ---
 # Mở đầu
-  Ở phần trước, chúng ta đã thiết lập xong database và setup những user cần thiết tùy theo mục đích sử dụng, ở phần này, chúng ta sẽ viết một web application đơn giản để tiến thêm 1 bước trong việc hoàn thiện dự án nhé.
+  Sau khi hoàn thành phần 1 và 2, lúc này, web app của chúng ta đã hoàn toàn có thể đảm bảo được chức năng hoạt động bình thường, tuy nhiên, nhiệm vụ của ``DevOps`` vẫn còn ở phía trước, đó chính là tạo cầu nối, mang quá trình ``commit`` phiên bản mới của application và ``deploy`` phiên bản đó lên môi trường ``production`` đến gần nhau hơn, tự động hóa quá trình đó. Hiện nay, có khá nhiều bộ tool có thể được sử dụng trong quá trình này, một trong số đó, khá nổi tiếng chính là ``Jenkins``. Kết hợp cùng ``Jenkins``, chúng ta còn các tool khác như ``Ansible``, ``Rundeck``, ``Spinaker``, ``GitHub Action``,... Tuy nhiên, để đơn giản hóa và để cho các bạn có 1 ``hand-ons`` lab dễ hiểu, mình sẽ chỉ sử dụng ``Jenkins`` và có chăng là thêm 1 chút ``Ansible`` cơn bản trong phần này.
+  
+  Phần này sẽ khá dài, do đó, các bạn hãy tập trung, ghi chép lại nếu cần và nếu có đóng góp, thắc mắc,... thì có thể contact với mình hoặc để lại comment trên GitHub issue nhé.
 
 # Phần 1: Chuẩn bị
-  Application sẽ được viết bằng Python, vậy nên việc cài đặt trước ``python3`` là cần thiết, với các phiên bản Ubuntu mới gần đây như ``22.04`` và ``24.04`` thì ``python3`` đã được cài sẵn, nên các bạn có thể skip qua bước này.
+  Mình muốn chia phần này thành 2 mục nhỏ, đầu tiên là thiết lập và cấu hình ``SCM`` hay nôm na là tạo repository trên ``Git``. Các bạn có thể xài ``GitLab`` hoặc ``GitHub`` tùy theo độ thành thạo. Ờ guide này, mình sẽ tự host 1 con GitLab để lưu trữ source code của mình cũng như là các file manifest hay config của luồng CI-CD.
+  
 
-  Cài đặt Python và Virtual Environment cho việc chạy app:
-  ```sh
-  sudo apt install -y python3-pip
-  sudo pip3 install virtualenv
-  ```
-
-  Lệnh trên giúp ta cài đặt ``pip``, một package management riêng của ``python``, sau này ta sẽ dùng ``pip`` để cài đặt các thư viện cũng như framework của application.
-  ``virtualenv`` chính là tên gói của ``python3-venv``, giúp chúng ta tạo 1 môi trường ảo, nôm na gần giống như virtual box để chúng ta có thể thoải mái cài đặt các thư viện, setup các biến môi trường mà không lo ảnh hưởng đến server của chúng ta.
-
-  Sau khi đã cài đặt xong các gói, chúng ta sẽ tạo một ``venv`` bằng câu lệnh:
-
-  ```sh
-  python3 -m venv env
-  ```
-
-  Câu lệnh trên tạo 1 môi trường ảo với tên là ``env``.
-  Để truy cập/ activate môi trường đó, chúng ta dùng command:
-
-  ```sh
-  ./env/bin/activate
-  ```
-
-  Nếu muốn thoát thì chỉ cần dùng command:
-
-  ```sh
-  deactivate
-  ```
-
-  Dĩ nhiên để application có thể chạy trơn tru thì các bạn cần setup database xong xuôi và trơn tru như ở phần hướng dẫn [này](./phần-1-database.md)
+  Để các bài cài đặt được GitLab (bản community) và đảm bảo server của các bạn ít bị lag nhất có thể thì nên chọn máy ảo có cấu hình nhỏ nhất là 4GB RAM.
 
 # Phần 2: Cài đặt môi trường chạy application
   Application này là một ứng dụng CRUD đơn giản, mình lấy từ nguồn này [Link](https://viblo.asia/p/xay-dung-ung-dung-web-crud-voi-python-va-flask-phan-mot-naQZRyydKvx)
@@ -114,4 +89,4 @@
   Phấn trước: [Database](./phần-1-database.md)
 
   Sau khi chạy thành công ``container``. cũng làm tuơng tự như trên, truy cập vào
-  Phần tiếp theo: [CI-CD](phần-3-ci-cd.md)
+  Phần tiếp theo: 
