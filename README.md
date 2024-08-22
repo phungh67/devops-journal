@@ -9,7 +9,7 @@
   Mình rất mong các repositories này được đóng góp cũng như có thể giúp ích cho mọi người trong việc giải quyết các taks mà cá nhân đang mắc phải, các vấn đề khó hoặc có thể là động lực để cố gắng.
 
 # Về repositories
-  Các repositories này chứa những ghi chép của mình về toolchains, service cũng như các bài toán mà cá nhân gặp phải. Mình có nói chi tiết hơn ở document [chi tiết](./Journal/VN/đề-mục.md) này.
+  Các repositories này chứa những ghi chép của mình về toolchains, service cũng như các bài toán mà cá nhân gặp phải. Mình có nói chi tiết hơn ở document [chi tiết](./Journal/VN/kì-1-đề-tài.md) này.
 
   Cảm ơn các bạn đã ghé qua và đọc những dòng này.
 
