@@ -42,5 +42,7 @@ Trong dự án này, mình sẽ tập trung vào phần cấu hình một cụm 
    - Kì 5: Setup Logging
    - Kì 6: Đưa toàn bộ hệ thống lên sử dụng các stack ở Cloud
    - Kì 7: Chuyển CI-CD qua GitHub Actions, ArgoCD,...
+  
+  **Kì tới: Setup Database, chạy demo ứng dụng và thêm Cache cho ứng dụng**
 
 [Top](#kì-1---pet-project-cho-những-devops-tập-sự) 
