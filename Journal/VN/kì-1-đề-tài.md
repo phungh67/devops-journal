@@ -45,4 +45,6 @@ Trong dự án này, mình sẽ tập trung vào phần cấu hình một cụm 
   
   **Kì tới: Setup Database, chạy demo ứng dụng và thêm Cache cho ứng dụng**
 
+  **[Kì 2: Setup môi trường chạy application cơ bản](./kì-2-setup-cơ-bản.md)**
+
 [Top](#kì-1---pet-project-cho-những-devops-tập-sự) 
