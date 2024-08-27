@@ -5,8 +5,11 @@
 ### **Mục lục**
 
 [1. Tạo môi trường cho ứng dụng](#1-setup-môi-trường-chạy-application)
+
 [2. Chạy thử application ở chế độ "vô hại"](#2-chuẩn-bị-hạ-tầng)
+
 [3. Nối ứng dụng với 1 database](#3-cài-đặt-và-cấu-hình-database)
+
 [4. Chúng ta làm gì ở kì tiếp](#4-kết)
 
 
