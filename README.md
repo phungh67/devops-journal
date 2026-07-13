@@ -17,7 +17,15 @@ So in this repository, I will try to focus on these tools. But it is not a "walk
 Currently, with the rapidly rising of the AI, and the inspiration from [AI for DevOps](https://github.com/VersusControl/devops-ai-guidelines/tree/main). For me, since I already have several years of experience, I will focus on creating my customize tools based on these documents. Since I have my own workstation, and my current situation does not favor the choice of using an expensive solution like provisioned GPU nodes, edge AI machines,... Moreover, since my lastest (and biggest) project is not my sole involvement, I have to keep it as a secret till the day all members decied to publish it.
 
 # Structural
+```plaintext
+devops-journal/
+├── Figures/                     # Lot of illustrations, outdated, maybe never update LOL
+├── Journal/                     # Step-by-step a pet project, will be updated soon
+└── ai-ops/                      # AI agent setup and practical (will be in product)
+```
 
 [Figures](Figures/) - the directory for all Figures that I use as illustrations for this repo, maybe outdate, I will soon update them if I have enough time.
+
 [Journal](Journal/) - bilinguals, but I will reduce it to only one language, saving lot of effort, also outdated, but will be update soon (medium priority).
+
 [AI agent](ai-ops/) - the playground for setting up an AI agent for DevOps work, currently I use Ollama with the directly `cURL` call (with the help of `Python` of course).
