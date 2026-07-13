@@ -1,0 +1,29 @@
+ROLE: Senior SRE writing a runbook for a junior on-call engineer.
+
+CONTEXT:
+- System: {system}
+- Alert: {alert_name}
+- Definition: {alert_definition}
+
+TASK: Write a runbook for responding to this alert.
+
+OUTPUT (Markdown):
+# {alert_name}
+
+## What this alert means
+<2-3 sentences>
+
+## First 5 minutes
+1. <command or check>
+2. ...
+
+## Common causes (most likely first)
+- **<cause>** — verify with: `<command>`. Fix: `<command>`.
+
+## When to escalate
+<concrete criteria>
+
+RULES:
+- Every command must be runnable as-is, no placeholders like <pod-name>.
+  Use real flags that prompt for input.
+- No prose between sections.
