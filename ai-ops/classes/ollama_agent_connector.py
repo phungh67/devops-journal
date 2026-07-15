@@ -2,7 +2,7 @@ import requests
 import json
 import os
 import time
-from typing import Optional, Literal
+from typing import Optional, Literal, Any
 from pydantic import BaseModel
 
 class Triage(BaseModel):
@@ -40,7 +40,7 @@ class OllamaConnector:
         # set the main group for api calling
         self.api_url = f"{self.host}/api/chat"
 
-    def generate_chat(self, payload: str) -> dict:
+    def generate_chat(self, constraint: Triage, payload: str) -> dict:
         """Generate a chat and return a dictionary of response
         
         Keyword arguments:
@@ -56,7 +56,7 @@ class OllamaConnector:
 
         headers = {"Content-Type": "application/json"}
 
-        formatted = Triage.model_json_schema()
+        formatted = constraint.model_json_schema()
 
         json_payload = {
             "model": self.model,
@@ -72,14 +72,6 @@ class OllamaConnector:
             resp.raise_for_status()
 
             resp = resp.json()
-
-            # return {
-            #     "model": resp['model'],
-            #     "output": resp['message']['content'],
-            #     "latency_s": round(time.perf_counter() - start, 2),
-            #     "input_token": resp['prompt_eval_count'],
-            #     "output_token": resp['eval_count']
-            # }
 
             resp = json.loads(resp['message']['content'])
             return resp

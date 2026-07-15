@@ -1,33 +1,18 @@
-from ollama import chat
-from ollama import ChatResponse
-
-import time
-
-MODELs = ["gemma4", "llama3.1"]
-
-def run_task(model: str, prompt: str) -> dict:
-    start = time.perf_counter()
-    resp =  chat(
-        model=model,
-        messages=[{
-            'role': 'user',
-            'content': prompt
-        }],
-    )
-
-    return {
-        "model": model,
-        "output": resp.message.content,
-        "latency_s": round(time.perf_counter() - start, 2),
-        "input_token": resp.prompt_eval_count,
-        "output_token": resp.eval_count
-    }
+from classes.ollama_agent_connector import OllamaConnector
+from prompts.log_analyzer.log_analyzer import Triagle as tri_response
 
 if __name__ == "__main__":
-    prompt = "Why the sky is blue?"
-    # print(run_task(MODELs[0], prompt))
-    resp = run_task(MODELs[0], prompt)
-    print(f'This prompt was produced by model: {resp['model']}\n')
-    print(f'Duration for this prompt: {resp['latency_s']}\n')
-    print(f'Input token: {resp['input_token']}\n')
-    print(f'Output token: {resp['output_token']}\n')
+    new_connector = OllamaConnector()
+    prompt = "How to theoretically update a thousands different images across a cluster with argoCD?"
+
+    system_prompt = (
+        "You are an expert DevOps engineer."
+        "Should you only explain in 2 sentences."
+    )
+
+    new_connector.system_prompt = system_prompt
+
+    resp = new_connector.generate_chat(tri_response, prompt)
+
+    for key, val in resp.items():
+        print(f"Key: {key}, Value: {val}")
