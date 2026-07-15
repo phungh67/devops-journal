@@ -1,4 +1,5 @@
 import os
+import json
 from typing import Optional, Literal
 
 from ollama import chat
@@ -31,4 +32,9 @@ def triagle_response(path_to_template: str, evidence_path: str) -> Triagle:
     A Triagle object with root_cause, confidence and next_step
     """
     
-    
+if __name__ == "__main__":
+    file_path = "./log_analyzer.json"
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    print(data)
