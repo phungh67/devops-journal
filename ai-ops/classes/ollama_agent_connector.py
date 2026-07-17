@@ -5,19 +5,6 @@ import time
 from typing import Optional, Literal, Any
 from pydantic import BaseModel
 
-class Triage(BaseModel):
-    """Class definition for the triagle response
-    ---
-    Contains 3 edges: Root_cause, confidence and next_step
-    root_case: the very root theoretical cause of the phenomenol
-    confidence: how reliable the response is
-    next_step: what to do next
-    """
-    solution: str
-    confidence: Literal["low", "medium", "high"]
-    next_step: str
-
-
 class OllamaConnector:
     """Class definition for Ollama connection
     ---
@@ -40,7 +27,7 @@ class OllamaConnector:
         # set the main group for api calling
         self.api_url = f"{self.host}/api/chat"
 
-    def generate_chat(self, constraint: Triage, payload: str) -> dict:
+    def generate_chat(self, constraint: Type[BaseModel], payload: str) -> dict:
         """Generate a chat and return a dictionary of response
         
         Keyword arguments:
@@ -73,8 +60,8 @@ class OllamaConnector:
 
             resp = resp.json()
 
-            resp = json.loads(resp['message']['content'])
-            return resp
+            content = json.loads(resp['message']['content'])
+            return content
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] Request to OLLAMA failed with: {str(e)}.\n")
             return {"error": "request to Ollama failed"}

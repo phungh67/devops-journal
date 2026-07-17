@@ -3,7 +3,7 @@
     "Context": {
         "System": "characteristic of the system, techstack, type,...",
         "Task": "intention to do with this system: update, modify,...",
-        "Last deploy": "08:45 UTC, image tag payments-api:v2.41.3"
+        "Detail": "task detail, "
     },
     "Task": "Read the log excerpt and identify the most likely root cause.",
     "Output": {
