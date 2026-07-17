@@ -30,8 +30,9 @@ ai-ops/
 └── main.py/                     # Entrypoint
 ```
 
-[classes][classes/]: Customized Ollama Connector, direct API calling, customized
-[prompts][prompts/]: Prompts with role and their own handlers
+[classes](classes/): Customized Ollama Connector, direct API calling, customized
+
+[prompts](prompts/): Prompts with role and their own handlers
 
 ## Flavors
 
@@ -39,3 +40,7 @@ Currently, there are 3 types of prompts:
 - log analyzer: an analyzer for log during incident, error troubleshooting time, currently focusing on first prototype, will try to make a "template/sketch" for log analyzer (based on some famous framework like Fiber, Flask,...)
 - runbook planner (unstarted): a planner for documenting the code base.
 - terraform reviewer (unstarted): the name says it all
+
+# Usage
+
+Can be freely modified, but remember to not cause circular dependencies. The prompts provides domain (definition, template and functions) while the connector simply provides the methods to pass these payload to the Ollama (or Anthropic, Gemini, they are all the same concept). And the main is only for running (entrypoint, orchestrator)
