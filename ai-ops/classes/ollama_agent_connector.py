@@ -49,6 +49,9 @@ class OllamaConnector:
             "model": self.model,
             "messages": message,
             "format": formatted,
+            "options": {
+                "temperature": 0.0
+            },
             "stream": False
         }
         
@@ -58,26 +61,14 @@ class OllamaConnector:
             resp = requests.post(self.api_url, json=json_payload, headers=headers)
             resp.raise_for_status()
 
-            resp = resp.json()
+            resp_data = resp.json()
 
-            content = json.loads(resp['message']['content'])
+            content = json.loads(resp_data['message']['content'])
             return content
+        except json.JSONDecodeError:
+            print("[ERROR] Model failed to return valid JSON. It hallucinated text instead.")
+            return {"error": "JSONDecodeError", "raw_output": resp_data['message']['content']}
+
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] Request to OLLAMA failed with: {str(e)}.\n")
             return {"error": "request to Ollama failed"}
-
-if __name__ == "__main__":
-    new_connector = OllamaConnector()
-    prompt = "How to update a thousands different images across a cluster with argoCD?"
-
-    system_prompt = (
-        "You are an expert DevOps engineer."
-        "Should you only explain in 2 sentences."
-    )
-
-    new_connector.system_prompt = system_prompt
-
-    resp = new_connector.generate_chat(prompt)
-
-    for key, val in resp.items():
-        print(f"Key: {key}, Value: {val}")

@@ -1,18 +1,21 @@
+from pathlib import Path
+
+# class import
 from classes.ollama_agent_connector import OllamaConnector
-from prompts.log_analyzer.log_analyzer import Triagle as tri_response
+
+# prompt library import
+# mostly function now
+from prompts.log_analyzer.log_analyzer import log_analyzer
+
+BASE_URL = "http://localhost:11434"
+BASE_MODEL = "llama3.1"
 
 if __name__ == "__main__":
-    new_connector = OllamaConnector()
-    prompt = "How to theoretically update a thousands different images across a cluster with argoCD?"
+    connector = OllamaConnector(BASE_URL, BASE_MODEL)
 
-    system_prompt = (
-        "You are an expert DevOps engineer."
-        "Should you only explain in 2 sentences."
-    )
+    log_dir = Path(__file__).parent
+    log_path = log_dir / "sample_log.txt"
 
-    new_connector.system_prompt = system_prompt
+    resp = log_analyzer(connector, log_path)
 
-    resp = new_connector.generate_chat(tri_response, prompt)
-
-    for key, val in resp.items():
-        print(f"Key: {key}, Value: {val}")
+    print(resp)
