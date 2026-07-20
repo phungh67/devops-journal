@@ -27,6 +27,9 @@ class OllamaConnector:
         # set the main group for api calling
         self.api_url = f"{self.host}/api/chat"
 
+        # telemetry data
+        self.telemetry = True
+
     def generate_chat(self, constraint: Type[BaseModel], payload: str) -> dict:
         """Generate a chat and return a dictionary of response
         
@@ -64,7 +67,9 @@ class OllamaConnector:
             resp_data = resp.json()
 
             content = json.loads(resp_data['message']['content'])
-            return content
+
+            formatted_content = json.dumps(content, indent=4)
+            return formatted_content
         except json.JSONDecodeError:
             print("[ERROR] Model failed to return valid JSON. It hallucinated text instead.")
             return {"error": "JSONDecodeError", "raw_output": resp_data['message']['content']}
