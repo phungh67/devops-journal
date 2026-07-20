@@ -29,6 +29,7 @@ class OllamaConnector:
 
         # telemetry data
         self.telemetry = True
+        self.efficiency = 0.0
 
     def generate_chat(self, constraint: Type[BaseModel], payload: str) -> dict:
         """Generate a chat and return a dictionary of response
@@ -65,6 +66,9 @@ class OllamaConnector:
             resp.raise_for_status()
 
             resp_data = resp.json()
+
+            if self.telemetry == True:
+                self.efficiency = resp_data['prompt_eval_count'] / resp_data['eval_count']
 
             content = json.loads(resp_data['message']['content'])
 

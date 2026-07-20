@@ -18,4 +18,6 @@ if __name__ == "__main__":
 
     resp = log_analyzer(connector, log_path)
 
+    print(connector.efficiency)
+
     print(resp)
