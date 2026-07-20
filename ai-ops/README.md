@@ -37,7 +37,7 @@ ai-ops/
 ## Flavors
 
 Currently, there are 3 types of prompts:
-- log analyzer: an analyzer for log during incident, error troubleshooting time, currently focusing on first prototype, will try to make a "template/sketch" for log analyzer (based on some famous framework like Fiber, Flask,...)
+- [log analyzer](./prompts/log_analyzer/): an analyzer for log during incident, error troubleshooting time, currently focusing on first prototype, will try to make a "template/sketch" for log analyzer (based on some famous framework like Fiber, Flask,...)
 - runbook planner (unstarted): a planner for documenting the code base.
 - terraform reviewer (unstarted): the name says it all
 
