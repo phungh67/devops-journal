@@ -7,6 +7,7 @@ from typing import Optional, Literal, List
 from pydantic import BaseModel, Field
 
 from classes.ollama_agent_connector import OllamaConnector
+from classes.log import ErrorPattern, Action, Triage
 
 class Triage(BaseModel):
     """Definition, templating for the response from the AI agent
