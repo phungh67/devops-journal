@@ -24,11 +24,11 @@ devops-journal/
 └── ai-ops/                      # AI agent setup and practical (will be in product)
 ```
 
-[Figures](Figures/) - the directory for all Figures that I use as illustrations for this repo, maybe outdate, I will soon update them if I have enough time.
+[Figures](Figures/) - the directory for all Figures that I use as illustrations for this repo, maybe outdate, I will soon update them if I have enough time. Rarely updated
 
-[Journal](Journal/) - bilinguals, but I will reduce it to only one language, saving lot of effort, also outdated, but will be update soon (medium priority).
+[Journal](Journal/) - bilinguals, but I will reduce it to only one language, saving lot of effort, also outdated, but will be update soon (medium priority). Not been updated for a long time, but will be received a new update soon.
 
-[AI agent](ai-ops/) - the playground for setting up an AI agent for DevOps work, currently I use Ollama with the directly `cURL` call (with the help of `Python` of course).
+[AI agent](ai-ops/) - the playground for setting up an AI agent for DevOps work, currently I use Ollama with the directly `cURL` call (with the help of `Python` of course). Actively updated on daily basis.
 
 ## Figures:
 
@@ -57,3 +57,9 @@ Inside this directory, you can find:
 - [prompts](./ai-ops/prompts/) the library for different roles, for example: log analyzer, planner and code reviewer. Treat the prompt like code, can be versioned, updated and continuously tweaked for better performance.
 
 The high level architecture should be: main (orchestrator) calls the necessary functions (log - aggregate log files and prepares data for analyze) then calls the connector to pass these fully prepared data to the LLM agent. Along with the connector, the corresponding prompt function (inside the `prompts` directory) will handle the data structural enforcer, output validation - that ensures you get your desried result. Inside the `classes`, I also try to create dedicated data classes for each function (log, code review and playbook planner surely need different constraints and expect different structural outputs).
+
+# Credits
+
+A lot of thanks to this repository: [DevOps AI Guidelines & Learning Path](https://github.com/VersusControl/devops-ai-guidelines/tree/main) since this is my main inspiration source.
+
+Second thank to this project: [LLM prompt-injection defender](https://github.com/phungh67/devops-docs/tree/main/language-based-security/project) in collaboration with Emilia Nicander from my class, as the final project of the **Language-based Security course**. This allowed me to gain knowledge about API calling, LLM protection and foundation knowledge about interacting with a LLM model.

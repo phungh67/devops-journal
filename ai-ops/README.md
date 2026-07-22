@@ -30,7 +30,7 @@ ai-ops/
 └── main.py/                     # Entrypoint
 ```
 
-[classes](classes/): Customized Ollama Connector, direct API calling, customized
+[classes](classes/): Connector and model definition for each specilazied roles.
 
 [prompts](prompts/): Prompts with role and their own handlers
 
