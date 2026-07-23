@@ -7,27 +7,7 @@ from typing import Optional, Literal, List
 from pydantic import BaseModel, Field
 
 from classes.ollama_agent_connector import OllamaConnector
-from classes.log import ErrorPattern, Action, Triage
-
-class Triage(BaseModel):
-    """Definition, templating for the response from the AI agent
-    
-    Contains must have, must satisfy and must not be null fields.
-    Should be used in collaboration with token count to measure the effective of prompts.
-    """
-
-    root_cause: str = Field(
-        description="Exactly one sentence identifying the most likely root cause. If logs are insufficient, set to 'insufficient evidence' and list what is missing."
-    )
-    evidence: List[str] = Field(
-        description="An array of log line snippets. Do not invent log lines. Quote them verbatim."
-    )
-    confidence: Literal["low", "medium", "high"] = Field(
-        description="The confidence level of the root cause analysis."
-    )
-    next_step: str = Field(
-        description="Exactly one concrete kubectl or curl command to execute next."
-    )
+from classes.log import Triage
 
 def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
     # currently only supported text log
@@ -54,6 +34,7 @@ def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
         f"Rules: {' '.join(template['Expected'])}\n"
         f"Constraint: {template['Output']['Constraint']}"
     )
+    print(f"DEBUG: The type of system_prompt is: {type(system_prompt)}")
 
     connector.system_prompt = system_prompt
 
