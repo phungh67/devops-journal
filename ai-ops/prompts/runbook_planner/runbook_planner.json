@@ -1,5 +1,5 @@
 {
-    "Role": "Senior DevOps on decision-making response.",
+    "Role": " Senior SRE writing a runbook for a junior on-call engineer",
     "Context": {
         "System": "characteristic of the system, techstack, type,...",
         "Task": "intention to do with this system: update, modify,...",

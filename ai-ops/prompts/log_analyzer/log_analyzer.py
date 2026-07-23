@@ -34,7 +34,6 @@ def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
         f"Rules: {' '.join(template['Expected'])}\n"
         f"Constraint: {template['Output']['Constraint']}"
     )
-    print(f"DEBUG: The type of system_prompt is: {type(system_prompt)}")
 
     connector.system_prompt = system_prompt
 

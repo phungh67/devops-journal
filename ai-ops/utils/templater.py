@@ -1,4 +1,8 @@
+import json
+
 from pydantic import BaseModel
+
+from verifier import verify_template
 
 def template_loader(file_name: str) -> str:
     """Load a JSON template file and return a system prompt in string
@@ -13,6 +17,8 @@ def template_loader(file_name: str) -> str:
 
     with open(template_file, "r") as file:
         template = json.load(file)
+
+    
     
     system_prompt = (
         f"Role: {template['Role']}\n"
