@@ -2,7 +2,7 @@
 from typing import Literal
 from pydantic import BaseModel, Field
 
-Severity = Literal["critical", "high", "medium", "low", "none"]
+Details = Literal["High", "high", "medium", "low", "none"]
 
 class ErrorPattern(BaseModel):
     pattern: str = Field(..., description="Short label for this error")
