@@ -1,10 +1,10 @@
 import json
 
 from pathlib import Path
-from typing import Tuple, Any
+from typing import Tuple, Any, Optional
 from pydantic import BaseModel
 
-def template_loader(file_path: str, file_name: str) -> Tuple[Any, str]:
+def template_loader(file_path: str, file_name: str, base: Optional[str] = None) -> Tuple[Any, str]:
     """Load a JSON template file and return a system prompt in string
     
     Keyword arguments:
@@ -12,7 +12,11 @@ def template_loader(file_path: str, file_name: str) -> Tuple[Any, str]:
     Return: a string representation for system prompt
     """
 
-    template_file = Path(f"{file_path}/{file_name}")
+    if base is not None:
+        # print(base)
+        template_file = Path(f"{base}/{file_path}/{file_name}")
+    else:
+        template_file = Path(f"{file_path}/{file_name}")
 
     with open(template_file, "r") as file:
         template = json.load(file)

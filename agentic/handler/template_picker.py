@@ -1,6 +1,9 @@
 import sys
+import json
 
 from pathlib import Path
+
+from typing import Optional
 
 current_dir = Path(__file__).resolve().parent
 parent_dir = current_dir.parent
@@ -10,20 +13,19 @@ sys.path.append(str(parent_dir))
 from utils.verifier import verify_template
 from utils.templater import template_loader
 
-def hanlder_load_template_file(file_path: str, file_name: str, mode="r"):
+def hanlder_load_template_file(file_path: str, file_name: str, mode="r", base: Optional[str] = None):
     try:
-        otemplate, prompt = template_loader(file_path, file_name)
+        otemplate, prompt = template_loader(file_path, file_name, root_dir)
 
-        print(otemplate)
-        print(type(otemplate))
+        print(json.dumps(otemplate, indent=4))
 
     except FileNotFoundError as e:
         print(f"[ERROR] Cannot open file, maybe file is missing or not exist: {e}")
 
 if __name__ == "__main__":
-    root_dir = Path("/home/huyhoang/devops-journal/ai-ops")
+    root_dir = Path("/home/huyhoang/devops-journal/agentic")
 
     file_path = "prompts/log_analyzer"
     file_name = "log_analyzer.json"
 
-    hanlder_load_template_file(file_path, file_name)
+    hanlder_load_template_file(file_path, file_name, "r", root_dir)
