@@ -15,7 +15,7 @@ from utils.templater import template_loader
 
 def hanlder_load_template_file(file_path: str, file_name: str, mode="r", base: Optional[str] = None):
     try:
-        otemplate, prompt = template_loader(file_path, file_name, root_dir)
+        otemplate, prompt = template_loader(file_path, file_name, base)
 
         print(json.dumps(otemplate, indent=4))
 

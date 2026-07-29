@@ -2,8 +2,16 @@ import sys
 from InquirerPy import inquirer
 from InquirerPy.validator import EmptyInputValidator
 
-from utils.templater import template_loader
-from utils.verifier import verify_template
+from pathlib import Path
+
+from typing import Optional
+
+current_dir = Path(__file__).resolve().parent
+parent_dir = current_dir.parent
+
+sys.path.append(str(parent_dir))
+
+from handler.template_picker import hanlder_load_template_file
 
 
 def main():
@@ -11,13 +19,18 @@ def main():
     print("    WELCOME TO THE SYSTEM PORTAL    ")
     print("====================================\n")
 
+    root_dir = Path("/home/huyhoang/devops-journal/agentic")
+
+    file_path = "prompts/log_analyzer"
+    file_name = "log_analyzer.json"
+    
     while True:
         # Main menu keyboard-navigable dropdown
         action = inquirer.select(
             message="Select an action:",
             choices=[
                 "View Profile",
-                "Configure Settings",
+                "Load a template",
                 "Submit Bug Report",
                 "Exit Application"
             ],
@@ -26,8 +39,8 @@ def main():
 
         if action == "View Profile":
             handle_view_profile()
-        elif action == "Configure Settings":
-            handle_configure_settings()
+        elif action == "Load a template":
+            hanlder_load_template_file(file_path, file_name, "r", root_dir)
         elif action == "Submit Bug Report":
             handle_Submit_bug()
         elif action == "Exit Application":
