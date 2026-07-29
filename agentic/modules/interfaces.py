@@ -11,7 +11,7 @@ parent_dir = current_dir.parent
 
 sys.path.append(str(parent_dir))
 
-from handler.template_picker import hanlder_load_template_file
+from handler.handle_load_template import hanlder_load_template_file
 
 
 def main():
