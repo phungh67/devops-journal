@@ -1,10 +1,10 @@
 import json
 
+from pathlib import Path
+from typing import Tuple, Any
 from pydantic import BaseModel
 
-from verifier import verify_template
-
-def template_loader(file_name: str) -> str:
+def template_loader(file_path: str, file_name: str) -> Tuple[Any, str]:
     """Load a JSON template file and return a system prompt in string
     
     Keyword arguments:
@@ -12,8 +12,7 @@ def template_loader(file_name: str) -> str:
     Return: a string representation for system prompt
     """
 
-    template_dir = Path(__file__).parent
-    template_file = template_dir / "log_analyzer.json"
+    template_file = Path(f"{file_path}/{file_name}")
 
     with open(template_file, "r") as file:
         template = json.load(file)
@@ -28,4 +27,4 @@ def template_loader(file_name: str) -> str:
         f"Constraint: {template['Output']['Constraint']}"
     )
     
-    return system_prompt
+    return template, system_prompt
