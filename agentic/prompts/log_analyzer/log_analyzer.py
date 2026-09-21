@@ -32,7 +32,8 @@ def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
         f"Context: {json.dumps(template['Context'])}\n"
         f"Task: {template['Task']}\n"
         f"Rules: {' '.join(template['Expected'])}\n"
-        f"Constraint: {template['Output']['Constraint']}"
+        f"Constraint: {template['Output']['Constraint']}\n"
+        f"Format Requirements: {json.dumps(template['Output']['Format'])}" # Added line
     )
 
     connector.system_prompt = system_prompt
