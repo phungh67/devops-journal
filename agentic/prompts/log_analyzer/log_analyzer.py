@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from classes.ollama_agent_connector import OllamaConnector
 from classes.log import Triage
 
-def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
+def log_analyzer(connector: OllamaConnector, log_path:str, context_override: dict = None) -> dict:
     # currently only supported text log
     # @TODO: change to read log files or batch read
     """Reads JSON template for constraint, constructs the prompt and calls chat
@@ -27,9 +27,13 @@ def log_analyzer(connector: OllamaConnector, log_path:str) -> dict:
     with open(template_file, "r") as file:
         template = json.load(file)
 
+    current_context = template['Context']
+    if context_override:
+        current_context.update(context_override)
+
     system_prompt = (
         f"Role: {template['Role']}\n"
-        f"Context: {json.dumps(template['Context'])}\n"
+        f"Context: {json.dumps(current_context)}\n"
         f"Task: {template['Task']}\n"
         f"Rules: {' '.join(template['Expected'])}\n"
         f"Constraint: {template['Output']['Constraint']}\n"

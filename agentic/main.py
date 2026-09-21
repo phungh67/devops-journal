@@ -20,6 +20,20 @@ class AgentDaemon(cmd.Cmd):
         self.connector = OllamaConnector(BASE_URL, BASE_MODEL)
         self.active_triage: Triage | None = None
 
+        self.context_override = {}
+
+    def do_context(self, arg):
+        """Modify the prompt context. Usage: context <key> <value>"""
+        args = arg.split(" ", 1)
+        if len(args) < 2:
+            print("Usage: context <key> <new_value>")
+            print(f"Current overrides: {json.dumps(self.context_override, indent=2)}")
+            return
+
+        key, new_val = args[0], args[1]
+        self.context_override[key] = new_val
+        print(f"Context override set: '{key}' = '{new_val}'")
+
     def do_analyzer(self, arg):
         """Analyze a log file. Usage: analyze <filename>"""
         filename = arg if arg else "sample_log.txt"
@@ -27,10 +41,9 @@ class AgentDaemon(cmd.Cmd):
 
         print(f"Analyzing {filename}...")
 
-        raw_json_str = log_analyzer(self.connector, log_path)
+        raw_json_str = log_analyzer(self.connector, log_path, context_override=self.context_override)
 
         try:
-            # Enforce the framework immediately
             parsed_dict = json.loads(raw_json_str)
             self.active_triage = Triage(**parsed_dict)
             print("\nAnalysis successful. Framework enforced.")
